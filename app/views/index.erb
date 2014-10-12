@@ -1,45 +1,55 @@
-<div class="container">
+<div id="top"><h1>U.S. Import and Export Price Index Graphs</h1></div>
 
-  <p>
-    <form action="">
-      <h1>IMPORTS</h1>
-      <select name="import" id="imports">
-        <% @imports.each do |import| %>
-          <option value="<%= import[1] %>"><%= import[0] %></option>
-        <% end %>
-      </select>
-    </form>
-  </p>
+<div id="main">
+  <h3><button id="prev">« Prev</button></h3>
 
-  <canvas id="importsChart" width="800" height="300"></canvas>
-</div>
+  <div id="container">
 
-<div class="container">
-  <p>
-    <form action="">
-      <h1>EXPORTS</h1>
-      <select name="export" id="exports">
-        <% @exports.each do |export| %>
-          <option value="<%= export[1] %>"><%= export[0] %></option>
-        <% end %>
-      </select>
-    </form>
-  </p>
+    <div class="chart" id="imports-chart">
+      <p>
+        <form action="">
+          <h1>IMPORTS</h1>
+          <select name="import" id="imports">
+            <% @imports.each do |import| %>
+              <option value="<%= import[1] %>"><%= import[0] %></option>
+            <% end %>
+          </select>
+        </form>
+      </p>
 
-  <canvas id="exportsChart" width="800" height="300"></canvas>
-</div>
+      <canvas id="importsChart" width="800" height="300"></canvas>
+    </div>
 
-<div class="container">
-  <p>
-    <form action="">
-      <h1>LOCALITY OF ORIGIN</h1>
-      <select name="locality" id="localities-of-origin">
-        <% @locality_of_origin.each do |locality| %>
-          <option value="<%= locality[1] %>"><%= locality[0] %></option>
-        <% end %>
-      </select>
-    </form>
-  </p>
+    <div class="chart" id="exports-chart">
+      <p>
+        <form action="">
+          <h1>EXPORTS</h1>
+          <select name="export" id="exports">
+            <% @exports.each do |export| %>
+              <option value="<%= export[1] %>"><%= export[0] %></option>
+            <% end %>
+          </select>
+        </form>
+      </p>
 
-  <canvas id="localityChart" width="800" height="300"></canvas>
+      <canvas id="exportsChart" width="800" height="300"></canvas>
+    </div>
+
+    <div class="chart" id="localities-chart">
+      <p>
+        <form action="">
+          <h1>LOCALITY OF ORIGIN</h1>
+          <select name="locality" id="localities-of-origin">
+            <% @locality_of_origin.each do |locality| %>
+              <option value="<%= locality[1] %>"><%= locality[0] %></option>
+            <% end %>
+          </select>
+        </form>
+      </p>
+
+      <canvas id="localityChart" width="800" height="300"></canvas>
+    </div>
+  </div>
+
+  <h3><button id="next">Next »</button></h3>
 </div>

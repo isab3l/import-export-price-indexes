@@ -3,6 +3,23 @@ $(document).ready(function() {
 	new ChartGenerator("#exportsChart", "#exports");
 	new ChartGenerator("#localityChart", "#localities-of-origin");
 
+	Chart.defaults.global.scaleFontSize = 10;
+	Chart.defaults.global.scaleFontColor = '#000';
+	Chart.defaults.global.tooltipFontSize = 10;
+	Chart.defaults.global.tooltipFontFamily = "'Trebuchet MS', Arial, sans-serif";
+	Chart.defaults.global.scaleFontFamily = "'Trebuchet MS', Arial, sans-serif";
+
+	$('#container').cycle({
+		fx:      'blindX',
+		prev:    '#prev',
+		next:    '#next',
+		timeout:  0,
+		after: function() {
+			var current = $(this).attr('id');
+			adjustNav(current);
+		}
+	});
+
 });
 
 var ChartListener = function(selectId, chart){
@@ -22,7 +39,7 @@ var ChartGenerator = function(chartId, seriesSelect){
 ChartGenerator.prototype.init = function(){
 	this.data = {
     	datasets: [{
-            fillColor: "rgba(220,220,220,0.2)",
+            fillColor: "rgba("+ randomColor() +",0.2)",
             strokeColor: "rgba(220,220,220,1)",
             pointColor: "rgba(220,220,220,1)",
             pointStrokeColor: "#fff",
@@ -48,7 +65,6 @@ ChartGenerator.prototype.init = function(){
 
 ChartGenerator.prototype.update = function(series){
 	var self = this;
-	console.log(series);
 	$.ajax({
 	  url: "/data",
 	  dataType: "json",
@@ -62,8 +78,28 @@ ChartGenerator.prototype.update = function(series){
 			self.context.canvas.height = 300;
   			self.data.labels = data[0];
   			self.data.datasets[0].data = data[1];
+  			self.data.datasets[0].fillColor = "rgba("+ randomColor() +",0.2)";
 			self.chart = new Chart(self.context).Line(self.data);
-			self.chart.update();
   		}
 	});
+}
+
+function randomColor(){
+	var hue = '' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + '';
+	return hue;
+}
+	
+function adjustNav(current){
+	if (current === "imports-chart") {
+		$("#prev").text('« Locality ');
+		$("#next").text('Exports »');
+	}
+	if (current === "exports-chart") {
+		$("#prev").text('« Imports');
+		$("#next").text('Locality »');
+	}
+	if (current === "localities-chart") {
+		$("#prev").text('« Exports');
+		$("#next").text('Imports »');
+	}
 }

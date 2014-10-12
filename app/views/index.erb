@@ -11,5 +11,35 @@
     </form>
   </p>
 
-  <canvas id="myChart" width="820" height="400"></canvas>
+  <canvas id="importsChart" width="800" height="300"></canvas>
+</div>
+
+<div class="container">
+  <p>
+    <form action="">
+      <h1>EXPORTS</h1>
+      <select name="export" id="exports">
+        <% @exports.each do |export| %>
+          <option value="<%= export[1] %>"><%= export[0] %></option>
+        <% end %>
+      </select>
+    </form>
+  </p>
+
+  <canvas id="exportsChart" width="800" height="300"></canvas>
+</div>
+
+<div class="container">
+  <p>
+    <form action="">
+      <h1>LOCALITY OF ORIGIN</h1>
+      <select name="locality" id="localities-of-origin">
+        <% @locality_of_origin.each do |locality| %>
+          <option value="<%= locality[1] %>"><%= locality[0] %></option>
+        <% end %>
+      </select>
+    </form>
+  </p>
+
+  <canvas id="localityChart" width="800" height="300"></canvas>
 </div>

@@ -1,5 +1,7 @@
 get '/' do
   @imports = IMPORTS.dup
+  @exports = EXPORTS.dup
+  @locality_of_origin = LOCALITY_OF_ORIGIN.dup
   erb :index
 end
 
